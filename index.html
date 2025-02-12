@@ -168,12 +168,12 @@ iframe {
                     <div class="card-body">
                         <h3 class="card-title">View Lead Dashboard</h3>
                         <p>Access your lead dashboard below:</p>
-                        <!-- View Leads Button -->
-<a href="https://leads.drasticdigital.com" 
-   onclick="window.open(this.href, '_blank'); return false;" 
-   class="btn btn-danger">
-    View Leads
-</a>
+                       <!-- Leads Button -->
+                        <a href="https://leads.drasticdigital.com" 
+                           onclick="openInNewTab(event, 'https://leads.drasticdigital.com')"
+                           class="btn btn-danger">
+                            View Leads
+                        </a>
 
                     </div>
                 </div>
@@ -186,11 +186,11 @@ iframe {
                         <h3 class="card-title">Project Files</h3>
                         <p>Access your project files in Google Drive below:</p>
                         <!-- Google Drive Button -->
-                                    <a id="drive-link" href="#" 
-                                      onclick="openNewTab(event, this.href)"
-                                   class="btn btn-primary">
-                                Open in Google Drive
-                            </a>
+                               <a id="drive-link" href="#" 
+                           onclick="openInNewTab(event, this.href)"
+                           class="btn btn-primary">
+                            Open in Google Drive
+                        </a>
                     </div>
                 </div>
             </div>
