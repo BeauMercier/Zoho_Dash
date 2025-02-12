@@ -9,56 +9,39 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
 
     <style>
-       body {
-    background-color: #000000 !important; /* True Black */
-    color: #ffffff !important; /* White text */
+       :root {
+    --tblr-bg-body: #000000 !important; /* Force Black */
+    --tblr-bg-card: #121212 !important; /* Darker Black for Cards */
+    --tblr-text-color: #ffffff !important; /* White Text */
 }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
+html, body {
+    background-color: #000000 !important; /* Force Background to True Black */
+    color: #ffffff !important; /* Ensure Text is White */
 }
 
-.card {
-    background-color: #121212 !important; /* Slightly lighter black */
-    color: #ffffff !important;
-    border: 1px solid #222222;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05); /* Soft glow effect */
-}
-
-/* Buttons */
+/* Ensure Buttons Stay Correct */
 .btn-danger {
-    background-color: #ff3b30 !important; /* Bright Red */
-    border: none;
-    transition: background 0.3s ease;
+    background-color: #ff3b30 !important;
 }
 .btn-danger:hover {
-    background-color: #d32f2f !important; /* Darker Red on Hover */
+    background-color: #d32f2f !important;
 }
-
 .btn-primary {
-    background-color: #007aff !important; /* Bright Blue */
-    border: none;
-    transition: background 0.3s ease;
+    background-color: #007aff !important;
 }
 .btn-primary:hover {
-    background-color: #005bb5 !important; /* Darker Blue on Hover */
+    background-color: #005bb5 !important;
 }
 
-/* Tables */
-.table {
-    background-color: #121212 !important;
-    color: #ffffff !important;
-    border-collapse: collapse;
-}
-.table th, .table td {
-    border-bottom: 1px solid #222222; /* Subtle lines for better readability */
+/* Force Zoho Creator iframe Background */
+iframe {
+    background-color: transparent !important;
 }
 
-/* Badges */
-.badge {
-    color: #ffffff !important;
-    font-weight: bold;
+/* Override Zoho Creator's Navigation Panel (Optional) */
+.zc-navigation {
+    background-color: #000000 !important;
 }
     </style>
 </head>
