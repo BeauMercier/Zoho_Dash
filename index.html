@@ -101,18 +101,11 @@
 
         <!-- Buttons -->
         <div class="row mt-4">
-            <!-- View Leads Button -->
-            <div class="col-md-6">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title">View Lead Dashboard</h3>
-                        <p>Access your lead dashboard</p>
-                        <a href="#" onclick="callZohoFunction('https://leads.drasticdigital.com')" class="btn btn-danger">
-                            View Leads
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <!-- Leads Button -->
+            <a href="#" onclick="callZohoFunction('https://leads.drasticdigital.com')" class="btn btn-danger">
+                View Leads
+            </a>
+
 
             <!-- Google Drive Widget (Dynamic Link) -->
             <div class="col-md-6">
@@ -133,17 +126,17 @@
     <script>
         function callZohoFunction(url) {
             if (url && url.trim() !== "") {
-                parent.postMessage({ type: "openZohoUrl", url: url }, "*"); // Send to Zoho Creator
+                parent.postMessage({ type: "openZohoUrl", url: url }, "*"); // Send URL to Zoho Creator
             }
         }
-
+    
         document.addEventListener("DOMContentLoaded", function() {
             var urlParams = new URLSearchParams(window.location.search);
             var clientDriveLink = urlParams.get("drive_link");
-
+    
             if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
                 var driveLinkElement = document.getElementById("drive-link");
-                driveLinkElement.dataset.driveLink = clientDriveLink;
+                driveLinkElement.dataset.driveLink = decodeURIComponent(clientDriveLink); // Fix Encoding
             }
         });
     </script>
