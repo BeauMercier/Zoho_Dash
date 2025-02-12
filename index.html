@@ -58,20 +58,22 @@
             <h1 class="page-title">Dashboard Overview</h1>
         </div>
 
-        <!-- Leads Button -->
-        <a href="#" onclick="sendToZoho('https://leads.drasticdigital.com')" class="btn btn-danger">
-            View Leads
-        </a>
+       <!-- Leads Button (Sends URL to Zoho Creator) -->
+<a href="#" onclick="sendToZoho('https://leads.drasticdigital.com')" class="btn btn-danger">
+    View Leads
+</a>
 
     </div>
 
-    <script>
-        function sendToZoho(url) {
-            if (url && url.trim() !== "") {
-                parent.postMessage({ type: "openZohoUrl", url: url }, "*");
-            }
+    
+<script>
+    function sendToZoho(url) {
+        if (url && url.trim() !== "") {
+            // ✅ Send the URL to Zoho Creator instead of opening it directly
+            parent.postMessage({ type: "openZohoUrl", url: url }, "*");
         }
-    </script>
+    }
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
