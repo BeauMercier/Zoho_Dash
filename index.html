@@ -147,13 +147,13 @@
     </div>
 
     <!-- JavaScript for Dynamic Google Drive Link -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var clientDriveLink = urlParams.get("drive_link") || "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID"; 
-            document.getElementById("drive-link").href = clientDriveLink;
-        });
-    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var clientDriveLink = urlParams.get("drive_link") || "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID"; 
+        document.getElementById("drive-link").href = clientDriveLink;
+    });
+</script>
 
     <!-- Tabler JS -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
