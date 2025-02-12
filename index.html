@@ -130,7 +130,7 @@ iframe {
                         <p>Access your lead dashboard below:</p>
                         <!-- View Leads Button -->
 <a href="https://leads.drasticdigital.com" 
-   onclick="openNewTab(event, 'https://leads.drasticdigital.com')"
+   onclick="window.open(this.href, '_blank'); return false;" 
    class="btn btn-danger">
     View Leads
 </a>
