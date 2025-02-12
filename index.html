@@ -158,14 +158,28 @@ iframe {
 
     </div>
 
-    <!-- JavaScript for Dynamic Google Drive Link -->
-   <script>
+
+
+    <script>
+    // Function to force open links in a new tab (prevents iframe blocking)
+    function openNewTab(event, url) {
+        event.preventDefault(); // Prevent default button behavior
+        window.open(url, "_blank"); // Open in a new tab
+    }
+
+    // Fetch dynamic Google Drive link from URL
     document.addEventListener("DOMContentLoaded", function() {
         var urlParams = new URLSearchParams(window.location.search);
-        var clientDriveLink = urlParams.get("drive_link") || "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID"; 
-        document.getElementById("drive-link").href = clientDriveLink;
+        var clientDriveLink = urlParams.get("drive_link");
+
+        // Ensure the link is valid before applying it
+        if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
+            var driveLinkElement = document.getElementById("drive-link");
+            driveLinkElement.href = clientDriveLink;
+            driveLinkElement.setAttribute("onclick", "openNewTab(event, this.href)");
+        }
     });
-</script>
+    </script>
 
     <!-- Tabler JS -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
