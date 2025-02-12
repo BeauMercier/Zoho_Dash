@@ -168,7 +168,7 @@ iframe {
                     <div class="card-body">
                         <h3 class="card-title">View Lead Dashboard</h3>
                         <p>Access your lead dashboard below:</p>
-                       <!-- Leads Button -->
+                      <!-- Leads Button -->
                         <a href="https://leads.drasticdigital.com" 
                            onclick="openInNewTab(event, 'https://leads.drasticdigital.com')"
                            class="btn btn-danger">
@@ -185,12 +185,12 @@ iframe {
                     <div class="card-body">
                         <h3 class="card-title">Project Files</h3>
                         <p>Access your project files in Google Drive below:</p>
-                        <!-- Google Drive Button -->
-                               <a id="drive-link" href="#" 
+                       <!-- Google Drive Button -->
+                        <a id="drive-link" href="#" 
                            onclick="openInNewTab(event, this.href)"
                            class="btn btn-primary">
                             Open in Google Drive
-                        </a>
+                        </a>        
                     </div>
                 </div>
             </div>
@@ -224,11 +224,24 @@ iframe {
     <!-- Tabler JS -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
-    <script>
-    function openNewTab(event, url) {
-        event.preventDefault();  // Prevents default behavior
-        window.open(url, "_blank"); // Opens in a new tab
+   <script>
+    function openInNewTab(event, url) {
+        event.preventDefault();  // Prevents the default blocked action
+        window.open(url, "_blank", "noopener,noreferrer"); // Opens in a new tab
     }
+
+    // Fetch dynamic Google Drive link from the URL
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var clientDriveLink = urlParams.get("drive_link");
+
+        // Ensure the link is valid before applying it
+        if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
+            var driveLinkElement = document.getElementById("drive-link");
+            driveLinkElement.href = clientDriveLink;
+            driveLinkElement.setAttribute("onclick", "openInNewTab(event, this.href)");
+        }
+    });
 </script>
 
 </body>
