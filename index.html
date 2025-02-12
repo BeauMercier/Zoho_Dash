@@ -184,5 +184,12 @@ iframe {
     <!-- Tabler JS -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
+    <script>
+    function openNewTab(event, url) {
+        event.preventDefault();  // Prevents default behavior
+        window.open(url, "_blank"); // Opens in a new tab
+    }
+</script>
+
 </body>
 </html>
