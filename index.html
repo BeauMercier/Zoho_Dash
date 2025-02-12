@@ -68,8 +68,8 @@
     
 <script>
     function sendToZoho(url) {
+        console.log("Sending to Zoho:", url); // ✅ Debugging: Check if this runs
         if (url && url.trim() !== "") {
-            // ✅ Send the URL to Zoho Creator instead of opening it directly
             parent.postMessage({ type: "openZohoUrl", url: url }, "*");
         }
     }
