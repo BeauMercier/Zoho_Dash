@@ -89,6 +89,42 @@
                             <td>$1,500</td>
                             <td><span class="badge bg-danger">Overdue</span></td>
                         </tr>
+                        <div class="row mt-4">
+    <!-- View Leads Widget -->
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="card-title">View Lead Dashboard</h3>
+                <p>Access your lead dashboard for managing sales and opportunities.</p>
+                <a href="https://leads.drasticdigital.com" target="_blank" class="btn btn-danger">
+                    View Leads
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Drive Widget (Dynamic Link) -->
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="card-title">Project Files</h3>
+                <p>Access your project files in Google Drive below:</p>
+                <a id="drive-link" href="#" target="_blank" class="btn btn-primary">
+                    Open in Google Drive
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to dynamically set the Google Drive link
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var clientDriveLink = urlParams.get("drive_link") || "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID"; 
+        document.getElementById("drive-link").href = clientDriveLink;
+    });
+</script>
                     </tbody>
                 </table>
             </div>
