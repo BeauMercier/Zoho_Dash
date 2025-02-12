@@ -167,12 +167,12 @@ iframe {
                 <div class="card text-center">
                     <div class="card-body">
                         <h3 class="card-title">View Lead Dashboard</h3>
-                        <p>Access your lead dashboard for managing sales and opportunities.</p>
-                        <a href="https://leads.drasticdigital.com" 
-                           onclick="openInNewTab(event, 'https://leads.drasticdigital.com')"
-                           class="btn btn-danger">
+                        <p>Access your lead dashboard</p>
+                       <!-- Leads Button -->
+                        <a href="#" onclick="callZohoFunction('https://leads.drasticdigital.com')" class="btn btn-danger">
                             View Leads
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -183,9 +183,7 @@ iframe {
                     <div class="card-body">
                         <h3 class="card-title">Project Files</h3>
                         <p>Access your project files in Google Drive below:</p>
-                        <a id="drive-link" href="#" 
-                           onclick="openInNewTab(event, this.href)"
-                           class="btn btn-primary">
+                        <a id="drive-link" href="#" onclick="callZohoFunction(this.getAttribute('data-drive-link'))" class="btn btn-primary">
                             Open in Google Drive
                         </a>
                     </div>
@@ -217,23 +215,23 @@ iframe {
     });
     </script>
 
-    <!-- Tabler JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
-
+   
     <script>
-        function openInNewTab(event, url) {
-            event.preventDefault();  // Prevents the default blocked action
-            window.open(url, "_blank", "noopener,noreferrer"); // Opens in a new tab
+        function callZohoFunction(url) {
+            if (url && url.trim() !== "") {
+                // Call Zoho Creator function (this will work inside the iframe)
+                parent.postMessage({ type: "openZohoUrl", url: url }, "*");
+            }
         }
-
+    
+        // Fetch dynamic Google Drive link from URL
         document.addEventListener("DOMContentLoaded", function() {
             var urlParams = new URLSearchParams(window.location.search);
             var clientDriveLink = urlParams.get("drive_link");
-
+    
             if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
                 var driveLinkElement = document.getElementById("drive-link");
-                driveLinkElement.href = clientDriveLink;
-                driveLinkElement.setAttribute("onclick", "openInNewTab(event, this.href)");
+                driveLinkElement.setAttribute("data-drive-link", clientDriveLink);
             }
         });
     </script>
