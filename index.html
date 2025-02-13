@@ -1,35 +1,248 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark"> <!-- Enables Dark Mode -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoho iFrame Button Test</title>
+    <title>Tabler Dashboard</title>
+    
+    <!-- Tabler Dark Mode CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+
+    <style>
+      :root {
+    --tblr-bg-body: #000000 !important; /* Force Black */
+    --tblr-bg-card: #121212 !important; /* Darker Black for Cards */
+    --tblr-text-color: #ffffff !important; /* White Text */
+}
+
+html, body {
+    background-color: #000000 !important; /* Force Background to True Black */
+    color: #ffffff !important; /* Ensure Text is White */
+}
+
+/* Ensure Containers & Cards Stay Dark */
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.card {
+    background-color: #121212 !important; /* Darker black for contrast */
+    color: #ffffff !important;
+    border: 1px solid #222222;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05); /* Soft glow effect */
+}
+
+/* Buttons */
+.btn-danger {
+    background-color: #ff3b30 !important; /* Bright Red */
+    border: none;
+    transition: background 0.3s ease;
+}
+.btn-danger:hover {
+    background-color: #d32f2f !important; /* Darker Red on Hover */
+}
+
+.btn-primary {
+    background-color: #007aff !important; /* Bright Blue */
+    border: none;
+    transition: background 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: #005bb5 !important; /* Darker Blue on Hover */
+}
+
+/* Tables */
+.table {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+    border-collapse: collapse;
+}
+.table th, .table td {
+    border-bottom: 1px solid #222222 !important; /* Subtle lines for better readability */
+}
+
+/* Force Background for Zoho Creator */
+iframe {
+    background-color: transparent !important;
+}
+
+/* Override Zoho Creator Navigation Panel (Optional) */
+.zc-navigation {
+    background-color: #000000 !important;
+}
+
+/* Fix Card Backgrounds */
+.card-body {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+/* Fix Status Badges */
+.badge {
+    color: #ffffff !important;
+    font-weight: bold;
+}
+    </style>
 </head>
 <body>
 
-    <h1>Zoho iFrame Button Test</h1>
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="page-header">
+            <h1 class="page-title">Overview</h1>
+        </div>
 
-    <!-- ✅ Button to Open Google Drive -->
-    <button id="openDriveBtn">
-        Open Google Drive
-    </button>
+        <!-- Stat Cards -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Total Sales</h3>
+                        <p class="h1">$12,345</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">New Leads</h3>
+                        <p class="h1">89</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Projects</h3>
+                        <p class="h1">23</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3 class="card-title">Recent Transactions</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Client</th>
+                            <th>Service</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Web Design</td>
+                            <td>$1,200</td>
+                            <td><span class="badge bg-success">Paid</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>Google Ads</td>
+                            <td>$800</td>
+                            <td><span class="badge bg-warning">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mike Johnson</td>
+                            <td>SEO Optimization</td>
+                            <td>$1,500</td>
+                            <td><span class="badge bg-danger">Overdue</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Widgets (Moved OUTSIDE the table) -->
+        <div class="row mt-4">
+            <!-- View Leads Widget -->
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title">View Lead Dashboard</h3>
+                        <p>Access your lead dashboard below:</p>
+                      <!-- Leads Button -->
+                        <a href="https://leads.drasticdigital.com" 
+                           onclick="openInNewTab(event, 'https://leads.drasticdigital.com')"
+                           class="btn btn-danger">
+                            View Leads
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Drive Widget (Dynamic Link) -->
+            <div class="col-md-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title">Project Files</h3>
+                        <p>Access your project files in Google Drive below:</p>
+                       <!-- Google Drive Button -->
+                        <a id="drive-link" href="#" 
+                           onclick="openInNewTab(event, this.href)"
+                           class="btn btn-primary">
+                            Open in Google Drive
+                        </a>        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
 
     <script>
-        let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID"; // Default for testing
+    // Function to force open links in a new tab (prevents iframe blocking)
+    function openNewTab(event, url) {
+        event.preventDefault(); // Prevent default button behavior
+        window.open(url, "_blank"); // Open in a new tab
+    }
 
-        // ✅ Listen for Zoho Creator Message (to update drive link)
-        window.addEventListener("message", function(event) {
-            if (event.data && event.data.type === "setDriveLink") {
-                driveLink = event.data.url;
-                console.log("✅ iFrame Debug: Received Drive Link =", driveLink);
-            }
-        });
+    // Fetch dynamic Google Drive link from URL
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var clientDriveLink = urlParams.get("drive_link");
 
-        // ✅ Send Click Event to Zoho Creator
-        document.getElementById("openDriveBtn").onclick = function() {
-            parent.postMessage({ type: "openExternalLink", url: driveLink }, "*");
-        };
+        // Ensure the link is valid before applying it
+        if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
+            var driveLinkElement = document.getElementById("drive-link");
+            driveLinkElement.href = clientDriveLink;
+            driveLinkElement.setAttribute("onclick", "openNewTab(event, this.href)");
+        }
+    });
     </script>
+
+    <!-- Tabler JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+
+   <script>
+    function openInNewTab(event, url) {
+        event.preventDefault();  // Prevents the default blocked action
+        window.open(url, "_blank", "noopener,noreferrer"); // Opens in a new tab
+    }
+
+    // Fetch dynamic Google Drive link from the URL
+    document.addEventListener("DOMContentLoaded", function() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var clientDriveLink = urlParams.get("drive_link");
+
+        // Ensure the link is valid before applying it
+        if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
+            var driveLinkElement = document.getElementById("drive-link");
+            driveLinkElement.href = clientDriveLink;
+            driveLinkElement.setAttribute("onclick", "openInNewTab(event, this.href)");
+        }
+    });
+</script>
 
 </body>
 </html>
