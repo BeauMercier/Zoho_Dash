@@ -1,40 +1,22 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Open Google Drive</title>
+    <title>Zoho iFrame Button Fix</title>
 </head>
 <body>
 
-    <button id="drive-button">Open Google Drive</button>
+    <button id="leads-button">View Leads</button>
 
     <script>
-        function getDriveLink() {
-            const urlParams = new URLSearchParams(window.location.search);
-            let driveLink = urlParams.get("drive_link");
-
-            if (driveLink && driveLink.trim() !== "" && driveLink.toLowerCase() !== "null") {
-                if (driveLink.includes("embeddedfolderview?id=")) {
-                    const folderId = driveLink.split("embeddedfolderview?id=")[1];
-                    driveLink = "https://drive.google.com/drive/folders/" + folderId;
-                }
-                return driveLink;
-            }
-            return null;
-        }
-
-        document.getElementById("drive-button").addEventListener("click", function() {
-            const driveLink = getDriveLink();
-            if (driveLink) {
-                // Create an anchor element and simulate a real user click
-                const a = document.createElement('a');
-                a.href = driveLink;
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                a.click();
-            } else {
-                alert("No valid Google Drive link available.");
-            }
+        document.getElementById("leads-button").addEventListener("click", function() {
+            const a = document.createElement('a');
+            a.href = "https://leads.drasticdigital.com";
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         });
     </script>
 
