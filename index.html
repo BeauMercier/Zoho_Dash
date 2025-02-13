@@ -8,31 +8,10 @@
 
     <script>
         function sendMessageToZoho(url) {
-            if (window.parent && window.parent.postMessage) { // Check if postMessage exists
-                window.parent.postMessage(JSON.stringify({ type: "openExternalLink", url: url }), "https://beaumercier.github.io"); // Correct origin + stringify
-            } else {
-                console.error("postMessage is not available in parent window.");
-            }
+            window.parent.postMessage(JSON.stringify({ type: "openExternalLink", url: url }), "*");
         }
 
-        window.addEventListener('message', function(event) {
-            console.log('Origin of message:', event.origin); // Check the origin
-
-            try {
-                const message = JSON.parse(event.data); // Parse received data
-                if (message.type === "openExternalLink") {
-                    console.log("Received link:", message.url);
-                    window.open(message.url, "_blank", "noopener,noreferrer");
-                }
-            } catch (error) {
-                console.error("Error parsing message:", error);
-            }
-        });
-
-        window.addEventListener("error", (event) => {
-            console.error("Iframe script error:", event);
-            alert("A script error occurred in the dashboard. Please check the console for details.");
-        });
+        //... (No need for message listener here)
     </script>
 </body>
 </html>
