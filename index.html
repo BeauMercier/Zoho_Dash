@@ -58,7 +58,7 @@
             <h1 class="page-title">Dashboard Overview</h1>
         </div>
 
-     <a href="#" onclick="sendToZoho('https://leads.drasticdigital.com')" class="btn btn-danger">
+     <a href="#" id="leads-button" class="btn btn-danger">
     View Leads
 </a>
 
@@ -67,8 +67,14 @@
 
     
 <script>
+    document.getElementById("leads-button").addEventListener("click", function(event) {
+        event.preventDefault(); // ✅ Stops the button from acting like a normal link
+        sendToZoho("https://leads.drasticdigital.com");
+    });
+
     function sendToZoho(url) {
         if (url && url.trim() !== "") {
+            console.log("Sending message to Zoho Creator:", url); // ✅ Debugging Log
             parent.postMessage({ type: "openZohoUrl", url: url }, "*");
         }
     }
