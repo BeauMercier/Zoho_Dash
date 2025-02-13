@@ -10,79 +10,79 @@
 
     <style>
       :root {
-    --tblr-bg-body: #000000 !important; /* Force Black */
-    --tblr-bg-card: #121212 !important; /* Darker Black for Cards */
-    --tblr-text-color: #ffffff !important; /* White Text */
-}
+        --tblr-bg-body: #000000 !important; /* Force Black */
+        --tblr-bg-card: #121212 !important; /* Darker Black for Cards */
+        --tblr-text-color: #ffffff !important; /* White Text */
+      }
 
-html, body {
-    background-color: #000000 !important; /* Force Background to True Black */
-    color: #ffffff !important; /* Ensure Text is White */
-}
+      html, body {
+        background-color: #000000 !important; /* Force Background to True Black */
+        color: #ffffff !important; /* Ensure Text is White */
+      }
 
-/* Ensure Containers & Cards Stay Dark */
-.container {
-    max-width: 1200px;
-    margin: auto;
-}
+      /* Ensure Containers & Cards Stay Dark */
+      .container {
+        max-width: 1200px;
+        margin: auto;
+      }
 
-.card {
-    background-color: #121212 !important; /* Darker black for contrast */
-    color: #ffffff !important;
-    border: 1px solid #222222;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05); /* Soft glow effect */
-}
+      .card {
+        background-color: #121212 !important; /* Darker black for contrast */
+        color: #ffffff !important;
+        border: 1px solid #222222;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05); /* Soft glow effect */
+      }
 
-/* Buttons */
-.btn-danger {
-    background-color: #ff3b30 !important; /* Bright Red */
-    border: none;
-    transition: background 0.3s ease;
-}
-.btn-danger:hover {
-    background-color: #d32f2f !important; /* Darker Red on Hover */
-}
+      /* Buttons */
+      .btn-danger {
+        background-color: #ff3b30 !important; /* Bright Red */
+        border: none;
+        transition: background 0.3s ease;
+      }
+      .btn-danger:hover {
+        background-color: #d32f2f !important; /* Darker Red on Hover */
+      }
 
-.btn-primary {
-    background-color: #007aff !important; /* Bright Blue */
-    border: none;
-    transition: background 0.3s ease;
-}
-.btn-primary:hover {
-    background-color: #005bb5 !important; /* Darker Blue on Hover */
-}
+      .btn-primary {
+        background-color: #007aff !important; /* Bright Blue */
+        border: none;
+        transition: background 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: #005bb5 !important; /* Darker Blue on Hover */
+      }
 
-/* Tables */
-.table {
-    background-color: #121212 !important;
-    color: #ffffff !important;
-    border-collapse: collapse;
-}
-.table th, .table td {
-    border-bottom: 1px solid #222222 !important; /* Subtle lines for better readability */
-}
+      /* Tables */
+      .table {
+        background-color: #121212 !important;
+        color: #ffffff !important;
+        border-collapse: collapse;
+      }
+      .table th, .table td {
+        border-bottom: 1px solid #222222 !important; /* Subtle lines for better readability */
+      }
 
-/* Force Background for Zoho Creator */
-iframe {
-    background-color: transparent !important;
-}
+      /* Force Background for Zoho Creator */
+      iframe {
+        background-color: transparent !important;
+      }
 
-/* Override Zoho Creator Navigation Panel (Optional) */
-.zc-navigation {
-    background-color: #000000 !important;
-}
+      /* Override Zoho Creator Navigation Panel (Optional) */
+      .zc-navigation {
+        background-color: #000000 !important;
+      }
 
-/* Fix Card Backgrounds */
-.card-body {
-    background-color: #121212 !important;
-    color: #ffffff !important;
-}
+      /* Fix Card Backgrounds */
+      .card-body {
+        background-color: #121212 !important;
+        color: #ffffff !important;
+      }
 
-/* Fix Status Badges */
-.badge {
-    color: #ffffff !important;
-    font-weight: bold;
-}
+      /* Fix Status Badges */
+      .badge {
+        color: #ffffff !important;
+        font-weight: bold;
+      }
     </style>
 </head>
 <body>
@@ -160,7 +160,7 @@ iframe {
             </div>
         </div>
 
-        <!-- Widgets (Moved OUTSIDE the table) -->
+        <!-- Widgets -->
         <div class="row mt-4">
             <!-- View Leads Widget -->
             <div class="col-md-6">
@@ -168,13 +168,12 @@ iframe {
                     <div class="card-body">
                         <h3 class="card-title">View Lead Dashboard</h3>
                         <p>Access your lead dashboard below:</p>
-                      <!-- Leads Button -->
-                      <a href="https://leads.drasticdigital.com" 
-                      onclick="openInNewTab(event, 'https://leads.drasticdigital.com')"
-                      class="btn btn-danger">
-                       View Leads
-                   </a>
-
+                        <!-- Leads Button -->
+                        <a href="https://leads.drasticdigital.com" 
+                           onclick="openInNewTab(event, 'https://leads.drasticdigital.com')"
+                           class="btn btn-danger">
+                           View Leads
+                        </a>
                     </div>
                 </div>
             </div>
@@ -185,12 +184,10 @@ iframe {
                     <div class="card-body">
                         <h3 class="card-title">Project Files</h3>
                         <p>Access your project files in Google Drive below:</p>
-                       <!-- Google Drive Button -->
-                       <zml>
-                        <button actionType="link" url="https://leads.drasticdigital.com" target="_blank" class="btn btn-danger">
-                            View Leads
-                        </button>
-                    </zml>
+                        <!-- This link will be updated dynamically if ?drive_link=... is present -->
+                        <a href="#" id="drive-link" class="btn btn-danger">
+                            Open Google Drive
+                        </a>
                     </div>
                 </div>
             </div>
@@ -198,51 +195,29 @@ iframe {
 
     </div>
 
-
-
-    <script>
-    // Function to force open links in a new tab (prevents iframe blocking)
-    function openNewTab(event, url) {
-        event.preventDefault(); // Prevent default button behavior
-        window.open(url, "_blank"); // Open in a new tab
-    }
-
-    // Fetch dynamic Google Drive link from URL
-    document.addEventListener("DOMContentLoaded", function() {
-        var urlParams = new URLSearchParams(window.location.search);
-        var clientDriveLink = urlParams.get("drive_link");
-
-        // Ensure the link is valid before applying it
-        if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
-            var driveLinkElement = document.getElementById("drive-link");
-            driveLinkElement.href = clientDriveLink;
-            driveLinkElement.setAttribute("onclick", "openNewTab(event, this.href)");
-        }
-    });
-    </script>
-
     <!-- Tabler JS -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
-   <script>
-    function openInNewTab(event, url) {
-        event.preventDefault();  // Prevents the default blocked action
-        window.open(url, "_blank", "noopener,noreferrer"); // Opens in a new tab
-    }
-
-    // Fetch dynamic Google Drive link from the URL
-    document.addEventListener("DOMContentLoaded", function() {
-        var urlParams = new URLSearchParams(window.location.search);
-        var clientDriveLink = urlParams.get("drive_link");
-
-        // Ensure the link is valid before applying it
-        if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
-            var driveLinkElement = document.getElementById("drive-link");
-            driveLinkElement.href = clientDriveLink;
-            driveLinkElement.setAttribute("onclick", "openInNewTab(event, this.href)");
+    <script>
+        // Function to force open links in a new tab (prevents iframe blocking)
+        function openInNewTab(event, url) {
+            event.preventDefault();  // Prevents the default action
+            window.open(url, "_blank", "noopener,noreferrer"); // Opens in a new tab
         }
-    });
-</script>
+
+        // Fetch dynamic Google Drive link from the URL
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var clientDriveLink = urlParams.get("drive_link");
+
+            // Ensure the link is valid before applying it
+            if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
+                var driveLinkElement = document.getElementById("drive-link");
+                driveLinkElement.href = clientDriveLink;
+                driveLinkElement.setAttribute("onclick", "openInNewTab(event, this.href)");
+            }
+        });
+    </script>
 
 </body>
 </html>
