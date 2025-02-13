@@ -1,47 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leads Portal</title>
-    <style>
-        body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            font-family: system-ui, -apple-system, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .leads-button {
-            background-color: #007aff;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .leads-button:hover {
-            background-color: #005bb5;
-        }
-    </style>
-</head>
+    </head>
 <body>
-    <h1>Leads Portal</h1>
-    <button class="leads-button" onclick="sendMessageToParent('https://leads.drasticdigital.com')">
-        View Leads
-    </button>
+    <h1>Zoho iFrame Button Test</h1>
+    <button onclick="sendMessageToZoho('https://leads.drasticdigital.com')">View Leads</button>
+    <button id="drive-button" onclick="openDriveLink()">Open Google Drive</button>
 
     <script>
-        function sendMessageToParent(url) {
-            window.parent.postMessage({
-                type: "openExternalLink",
-                url: url
-            }, "*");
+        let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID"; // Default
+
+        function sendMessageToZoho(url) {
+            window.parent.postMessage({ type: "openExternalLink", url: url }, "*");
         }
+
+        function openDriveLink() {
+          if (driveLink) { // Check if driveLink is set
+            sendMessageToZoho(driveLink);
+          } else {
+            console.error("Drive link not yet available.");
+            // Optionally, display a message to the user
+            alert("Drive link is not yet available. Please wait.");
+          }
+        }
+
+
+        window.addEventListener("message", function(event) {
+            if (event.data && event.data.type === "setDriveLink") {
+                driveLink = event.data.link;
+                console.log("Received Drive link:", driveLink); // For debugging
+            }
+        });
+
+      //  Remove the DOMContentLoaded listener.  We're now receiving the link via postMessage.
     </script>
 </body>
 </html>
