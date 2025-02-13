@@ -58,10 +58,10 @@
             <h1 class="page-title">Dashboard Overview</h1>
         </div>
 
-    <!-- Leads Button (Triggers Zoho Function) -->
-<a href="#" id="leads-button" class="btn btn-danger">
+   <a href="#" id="leads-button" class="btn btn-danger">
     View Leads
 </a>
+
 
 
     </div>
@@ -70,6 +70,7 @@
 <script>
     document.getElementById("leads-button").addEventListener("click", function(event) {
         event.preventDefault(); // ✅ Stops default link behavior
+        console.log("🚀 Sending message to Zoho Creator: https://leads.drasticdigital.com"); // ✅ Debugging Log
         parent.postMessage({ type: "callZohoFunction", url: "https://leads.drasticdigital.com" }, "*");
     });
 </script>
