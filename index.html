@@ -59,7 +59,7 @@
         </div>
 
        <!-- Leads Button (Sends URL to Zoho Creator) -->
-<a href="#" onclick="sendToZoho('https://leads.drasticdigital.com')" class="btn btn-danger">
+<a href="#" onclick="callZohoFunction('https://leads.drasticdigital.com')" class="btn btn-danger">
     View Leads
 </a>
 
@@ -67,10 +67,9 @@
 
     
 <script>
-    function sendToZoho(url) {
-        console.log("Sending to Zoho:", url); // ✅ Debugging: Check if this runs
+    function callZohoFunction(url) {
         if (url && url.trim() !== "") {
-            parent.postMessage({ type: "openZohoUrl", url: url }, "*");
+            parent.postMessage({ type: "callZohoFunction", url: url }, "*");
         }
     }
 </script>
