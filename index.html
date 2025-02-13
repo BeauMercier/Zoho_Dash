@@ -5,31 +5,23 @@
 <body>
     <h1>Zoho iFrame Button Test</h1>
     <button onclick="sendMessageToZoho('https://leads.drasticdigital.com')">View Leads</button>
-    <button id="drive-button" onclick="openDriveLink()" disabled>Open Google Drive</button>
 
     <script>
-        let driveLink;
-
         function sendMessageToZoho(url) {
-            window.parent.postMessage({ type: "openExternalLink", url: url }, "*");
+            window.parent.postMessage(JSON.stringify({ type: "openExternalLink", url: url }), "https://beaumercier.github.io"); // Correct origin + stringify
         }
 
-        function openDriveLink() {
-            if (driveLink) {
-                sendMessageToZoho(decodeURIComponent(driveLink));
-            } else {
-                console.error("Drive link not yet available.");
-                alert("Drive link is not yet available. Please wait.");
-            }
-        }
+        window.addEventListener('message', function(event) {
+            console.log('Origin of message:', event.origin); // Check the origin
 
-        window.addEventListener("message", function(event) {
-            if (event.data && event.data.type === "setDriveLink") {
-                driveLink = event.data.link;
-                console.log("Received Drive link (encoded):", driveLink);
-                const decodedLink = decodeURIComponent(driveLink);
-                console.log("Decoded Drive link:", decodedLink);
-                document.getElementById("drive-button").disabled = false;
+            try {
+                const message = JSON.parse(event.data); // Parse received data
+                if (message.type === "openExternalLink") {
+                    console.log("Received link:", message.url);
+                    window.open(message.url, "_blank", "noopener,noreferrer");
+                }
+            } catch (error) {
+                console.error("Error parsing message:", error);
             }
         });
 
