@@ -185,9 +185,11 @@
                         <h3 class="card-title">Project Files</h3>
                         <p>Access your project files in Google Drive below:</p>
                         <!-- This link will be updated dynamically if ?drive_link=... is present -->
-                        <a href="#" id="drive-link" class="btn btn-danger">
-                            Open Google Drive
+                        <!-- Google Drive Button -->
+                        <a href="#" id="drive-button" class="btn btn-primary">
+                            Open in Google Drive
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -198,26 +200,20 @@
     <!-- Tabler JS -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
-    <script>
-        // Function to force open links in a new tab (prevents iframe blocking)
-        function openInNewTab(event, url) {
-            event.preventDefault();  // Prevents the default action
-            window.open(url, "_blank", "noopener,noreferrer"); // Opens in a new tab
-        }
+   <script>
+    // ✅ Extract drive link from URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var driveLink = urlParams.get("drive_link") || "";
 
-        // Fetch dynamic Google Drive link from the URL
-        document.addEventListener("DOMContentLoaded", function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var clientDriveLink = urlParams.get("drive_link");
+    console.log("🔍 Extracted Drive Link:", driveLink);
 
-            // Ensure the link is valid before applying it
-            if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
-                var driveLinkElement = document.getElementById("drive-link");
-                driveLinkElement.href = clientDriveLink;
-                driveLinkElement.setAttribute("onclick", "openInNewTab(event, this.href)");
-            }
-        });
-    </script>
+    // ✅ When button is clicked, send a message to Zoho Creator
+    document.getElementById("drive-button").addEventListener("click", function(event) {
+        event.preventDefault(); // ✅ Prevents default link behavior
+        console.log("🚀 Sending message to Zoho:", driveLink);
+        parent.postMessage({ type: "openDrive", url: driveLink }, "*");
+    });
+</script>
 
 </body>
 </html>
