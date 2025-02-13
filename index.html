@@ -2,21 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Zoho iFrame Button Fix</title>
+    <title>Open Leads</title>
 </head>
 <body>
 
+    <a id="leads-link" href="https://leads.drasticdigital.com" target="_blank" rel="noopener noreferrer"></a>
     <button id="leads-button">View Leads</button>
 
     <script>
         document.getElementById("leads-button").addEventListener("click", function() {
-            const a = document.createElement('a');
-            a.href = "https://leads.drasticdigital.com";
-            a.target = "_blank";
-            a.rel = "noopener noreferrer";
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            document.getElementById("leads-link").click();
         });
     </script>
 
