@@ -15,11 +15,11 @@
     </button>
 
     <script>
-        // ✅ Listen for a message from Zoho Creator (for the drive link)
+        // ✅ Listen for a message from Zoho Creator
         window.addEventListener("message", function(event) {
             if (event.data && event.data.type === "setDriveLink") {
                 const driveLink = event.data.url;  // Get the Drive Folder Link
-                console.log("Received Drive Link:", driveLink);
+                console.log("✅ iFrame Debug: Received Drive Link =", driveLink); // 🔍 Debugging
 
                 // ✅ Modify Button Click to Open the Drive Link
                 document.getElementById("openDriveBtn").onclick = function() {
