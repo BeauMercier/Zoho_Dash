@@ -58,20 +58,18 @@
             <h1 class="page-title">Dashboard Overview</h1>
         </div>
 
-      <!-- Leads Button (Now Uses ZML-Compatible Format) -->
-<zml>
-    <button action='OpenURL' url='https://leads.drasticdigital.com' target='new-window' 
-            color='#FFFFFF' size='16px' text='View Leads' type='rounded' 
-            bgColor='#EF1616' cornerRadius='45px' />
-</zml>
+     <a href="#" onclick="sendToZoho('https://leads.drasticdigital.com')" class="btn btn-danger">
+    View Leads
+</a>
+
 
     </div>
 
     
 <script>
-    function callZohoFunction(url) {
+    function sendToZoho(url) {
         if (url && url.trim() !== "") {
-            parent.postMessage({ type: "callZohoFunction", url: url }, "*");
+            parent.postMessage({ type: "openZohoUrl", url: url }, "*");
         }
     }
 </script>
