@@ -6,12 +6,11 @@
 </head>
 <body>
 
-    <a id="leads-link" href="https://leads.drasticdigital.com" target="_blank" rel="noopener noreferrer"></a>
     <button id="leads-button">View Leads</button>
 
     <script>
         document.getElementById("leads-button").addEventListener("click", function() {
-            document.getElementById("leads-link").click();
+            window.parent.postMessage({ type: "openExternalLink", url: "https://leads.drasticdigital.com" }, "*");
         });
     </script>
 
