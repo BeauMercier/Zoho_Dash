@@ -9,24 +9,26 @@
 
     <h1>Zoho iFrame Button Test</h1>
 
-    <!-- ✅ Button to Open Google Drive Folder -->
+    <!-- ✅ Button to Open Google Drive -->
     <button id="openDriveBtn">
         Open Google Drive
     </button>
 
     <script>
-        // ✅ Listen for a message from Zoho Creator
+        let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID"; // Default for testing
+
+        // ✅ Listen for Zoho Creator Message (to update drive link)
         window.addEventListener("message", function(event) {
             if (event.data && event.data.type === "setDriveLink") {
-                const driveLink = event.data.url;  // Get the Drive Folder Link
-                console.log("✅ iFrame Debug: Received Drive Link =", driveLink); // 🔍 Debugging
-
-                // ✅ Modify Button Click to Open the Drive Link
-                document.getElementById("openDriveBtn").onclick = function() {
-                    window.open(driveLink, "_blank");  // Open in a new tab
-                };
+                driveLink = event.data.url;
+                console.log("✅ iFrame Debug: Received Drive Link =", driveLink);
             }
         });
+
+        // ✅ Send Click Event to Zoho Creator
+        document.getElementById("openDriveBtn").onclick = function() {
+            parent.postMessage({ type: "openExternalLink", url: driveLink }, "*");
+        };
     </script>
 
 </body>
