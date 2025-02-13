@@ -2,26 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Zoho iFrame Fix</title>
+    <title>Zoho iFrame Button Fix</title>
 </head>
 <body>
 
-    <button onclick="redirectToNewTab('https://leads.drasticdigital.com')">View Leads</button>
-    <button id="drive-button" onclick="redirectToNewTab(driveLink)">Open Google Drive</button>
+    <button id="drive-button">Open Google Drive</button>
 
     <script>
-        let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID";
+        function getDriveLink() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let driveLink = urlParams.get("drive_link");
 
-        function redirectToNewTab(url) {
-            window.location.href = `redirect.html?url=${encodeURIComponent(url)}`;
+            if (driveLink && driveLink.trim() !== "" && driveLink.toLowerCase() !== "null") {
+                if (driveLink.includes("embeddedfolderview?id=")) {
+                    const folderId = driveLink.split("embeddedfolderview?id=")[1];
+                    driveLink = "https://drive.google.com/drive/folders/" + folderId;
+                }
+                return driveLink;
+            }
+            return null;
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const clientDriveLink = urlParams.get("drive_link");
-
-            if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
-                driveLink = clientDriveLink;
+        document.getElementById("drive-button").addEventListener("click", function() {
+            const driveLink = getDriveLink();
+            if (driveLink) {
+                // Create an anchor element dynamically and simulate a user click
+                const a = document.createElement('a');
+                a.href = driveLink;
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else {
+                alert("No valid Google Drive link available.");
             }
         });
     </script>
