@@ -16,13 +16,19 @@
     <button id="openDrive">Open Google Drive</button>
 
     <script>
+        // Function to open a new tab
+        function openInNewTab(url) {
+            window.open(url, "_blank", "noopener,noreferrer");
+        }
+
         // Google Drive Button (Uses URL Passed from Zoho)
         document.addEventListener("DOMContentLoaded", function () {
             const params = new URLSearchParams(window.location.search);
             const driveLink = params.get("drive_link");
+
             document.getElementById("openDrive").addEventListener("click", function () {
-                if (driveLink) {
-                    window.open(driveLink, "_blank");
+                if (driveLink && driveLink.trim() !== "" && driveLink.toLowerCase() !== "null") {
+                    openInNewTab(driveLink);
                 } else {
                     alert("Google Drive link is missing!");
                 }
