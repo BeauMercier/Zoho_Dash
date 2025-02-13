@@ -58,10 +58,12 @@
             <h1 class="page-title">Dashboard Overview</h1>
         </div>
 
-       <!-- Leads Button (Sends URL to Zoho Creator) -->
-<a href="#" onclick="callZohoFunction('https://leads.drasticdigital.com')" class="btn btn-danger">
-    View Leads
-</a>
+      <!-- Leads Button (Now Uses ZML-Compatible Format) -->
+<zml>
+    <button action='OpenURL' url='https://leads.drasticdigital.com' target='new-window' 
+            color='#FFFFFF' size='16px' text='View Leads' type='rounded' 
+            bgColor='#EF1616' cornerRadius='45px' />
+</zml>
 
     </div>
 
