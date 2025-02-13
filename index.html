@@ -2,25 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoho iFrame Button Fix</title>
+    <title>Zoho iFrame Fix</title>
 </head>
 <body>
 
-    <button onclick="openInNewTab('https://leads.drasticdigital.com')">View Leads</button>
-    <button id="drive-button" onclick="openInNewTab(driveLink)">Open Google Drive</button>
+    <button onclick="redirectToNewTab('https://leads.drasticdigital.com')">View Leads</button>
+    <button id="drive-button" onclick="redirectToNewTab(driveLink)">Open Google Drive</button>
 
     <script>
         let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID";
 
-        function openInNewTab(url) {
-            const a = document.createElement('a');
-            a.href = url;
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+        function redirectToNewTab(url) {
+            window.location.href = `redirect.html?url=${encodeURIComponent(url)}`;
         }
 
         document.addEventListener("DOMContentLoaded", function() {
