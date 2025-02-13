@@ -8,7 +8,11 @@
 
     <script>
         function sendMessageToZoho(url) {
-            window.parent.postMessage(JSON.stringify({ type: "openExternalLink", url: url }), "https://beaumercier.github.io"); // Correct origin + stringify
+            if (window.parent && window.parent.postMessage) { // Check if postMessage exists
+                window.parent.postMessage(JSON.stringify({ type: "openExternalLink", url: url }), "https://beaumercier.github.io"); // Correct origin + stringify
+            } else {
+                console.error("postMessage is not available in parent window.");
+            }
         }
 
         window.addEventListener('message', function(event) {
