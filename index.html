@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Zoho iFrame Button Fix</title>
+    <title>Zoho iFrame Google Drive Fix</title>
 </head>
 <body>
 
@@ -13,6 +13,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             let driveLink = urlParams.get("drive_link");
 
+            // Ensure the link is valid before using it
             if (driveLink && driveLink.trim() !== "" && driveLink.toLowerCase() !== "null") {
                 if (driveLink.includes("embeddedfolderview?id=")) {
                     const folderId = driveLink.split("embeddedfolderview?id=")[1];
@@ -26,7 +27,7 @@
         document.getElementById("drive-button").addEventListener("click", function() {
             const driveLink = getDriveLink();
             if (driveLink) {
-                // Create an anchor element dynamically and simulate a user click
+                // Create a hidden anchor element and trigger a real click
                 const a = document.createElement('a');
                 a.href = driveLink;
                 a.target = '_blank';
