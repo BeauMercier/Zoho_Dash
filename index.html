@@ -48,6 +48,7 @@
         let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID";
 
         function sendMessageToZoho(url) {
+            console.log("Sending URL to Zoho Creator:", url);
             window.parent.postMessage({ type: "openExternalLink", url: url }, "*");
         }
 
@@ -56,7 +57,7 @@
             var clientDriveLink = urlParams.get("drive_link");
 
             if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
-                driveLink = clientDriveLink;
+                driveLink = decodeURIComponent(clientDriveLink); // Fix encoding issue
             }
         });
     </script>
