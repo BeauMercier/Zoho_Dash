@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho iFrame Button Test</title>
+</head>
 <body>
     <h1>Zoho iFrame Button Test</h1>
     <button onclick="sendMessageToZoho('https://leads.drasticdigital.com')">View Leads</button>
     <button id="drive-button" onclick="openDriveLink()">Open Google Drive</button>
 
     <script>
-        let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID"; // Default
+        let driveLink; // Do NOT initialize here. Let the message from Zoho set it.
 
         function sendMessageToZoho(url) {
             window.parent.postMessage({ type: "openExternalLink", url: url }, "*");
         }
 
         function openDriveLink() {
-          if (driveLink) { // Check if driveLink is set
-            sendMessageToZoho(driveLink);
-          } else {
-            console.error("Drive link not yet available.");
-            // Optionally, display a message to the user
-            alert("Drive link is not yet available. Please wait.");
-          }
+            if (driveLink) {
+                sendMessageToZoho(driveLink);
+            } else {
+                console.error("Drive link not yet available.");
+                alert("Drive link is not yet available. Please wait.");
+            }
         }
-
 
         window.addEventListener("message", function(event) {
             if (event.data && event.data.type === "setDriveLink") {
                 driveLink = event.data.link;
-                console.log("Received Drive link:", driveLink); // For debugging
+                console.log("Received Drive link:", driveLink);
+                // Enable the Drive button now that we have the link
+                document.getElementById("drive-button").disabled = false; 
             }
         });
 
-      //  Remove the DOMContentLoaded listener.  We're now receiving the link via postMessage.
+        // Disable the Drive button initially until we receive the link
+        document.getElementById("drive-button").disabled = true; 
     </script>
 </body>
 </html>
