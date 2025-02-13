@@ -3,91 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabler Dashboard</title>
-    
-    <!-- Tabler Dark Mode CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
+    <title>Zoho iFrame Button Test</title>
 
     <style>
-        :root {
-            --tblr-bg-body: #000000 !important;
-            --tblr-bg-card: #121212 !important;
-            --tblr-text-color: #ffffff !important;
-        }
-
         html, body {
-            background-color: #000000 !important;
-            color: #ffffff !important;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .card {
-            background-color: #121212 !important;
-            color: #ffffff !important;
-            border: 1px solid #222222;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-        }
-
-        .btn-danger {
-            background-color: #ff3b30 !important;
+        button {
+            background-color: #007aff;
+            color: white;
             border: none;
-            transition: background 0.3s ease;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            margin: 10px;
         }
 
-        .btn-danger:hover {
-            background-color: #d32f2f !important;
-        }
-
-        .btn-primary {
-            background-color: #007aff !important;
-            border: none;
-            transition: background 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #005bb5 !important;
+        button:hover {
+            background-color: #005bb5;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Overview</h1>
-        </div>
+    <h1>Zoho iFrame Button Test</h1>
 
-        <div class="row mt-4">
-            <!-- Leads Button -->
-            <div class="col-md-6">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title">View Lead Dashboard</h3>
-                        <p>Access your lead dashboard below:</p>
-                        <button onclick="sendMessageToZoho('https://leads.drasticdigital.com')" class="btn btn-danger">
-                            View Leads
-                        </button>
-                    </div>
-                </div>
-            </div>
+    <!-- Leads Button -->
+    <button onclick="sendMessageToZoho('https://leads.drasticdigital.com')">
+        View Leads
+    </button>
 
-            <!-- Google Drive Widget -->
-            <div class="col-md-6">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title">Project Files</h3>
-                        <p>Access your project files in Google Drive below:</p>
-                        <button id="drive-button" onclick="sendMessageToZoho(driveLink)" class="btn btn-primary">
-                            Open in Google Drive
-                        </button>        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Google Drive Button -->
+    <button id="drive-button" onclick="sendMessageToZoho(driveLink)">
+        Open Google Drive
+    </button>
 
     <script>
         let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID";
@@ -105,9 +60,6 @@
             }
         });
     </script>
-
-    <!-- Tabler JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
 </body>
 </html>
