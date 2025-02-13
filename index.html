@@ -1,113 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabler Dashboard</title>
-    
-    <!-- Tabler Dark Mode CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css">
-
-    <style>
-        :root {
-            --tblr-bg-body: #000000 !important;
-            --tblr-bg-card: #121212 !important;
-            --tblr-text-color: #ffffff !important;
-        }
-
-        html, body {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .card {
-            background-color: #121212 !important;
-            color: #ffffff !important;
-            border: 1px solid #222222;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
-        }
-
-        .btn-danger {
-            background-color: #ff3b30 !important;
-            border: none;
-            transition: background 0.3s ease;
-        }
-
-        .btn-danger:hover {
-            background-color: #d32f2f !important;
-        }
-
-        .btn-primary {
-            background-color: #007aff !important;
-            border: none;
-            transition: background 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #005bb5 !important;
-        }
-    </style>
+    <title>Zoho iFrame Button Fix</title>
 </head>
 <body>
 
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">Overview</h1>
-        </div>
-
-        <div class="row mt-4">
-            <!-- Leads Button -->
-            <div class="col-md-6">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title">View Lead Dashboard</h3>
-                        <p>Access your lead dashboard below:</p>
-                        <button onclick="sendMessageToZoho('https://leads.drasticdigital.com')" class="btn btn-danger">
-                            View Leads
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Google Drive Widget -->
-            <div class="col-md-6">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title">Project Files</h3>
-                        <p>Access your project files in Google Drive below:</p>
-                        <button id="drive-button" onclick="sendMessageToZoho(driveLink)" class="btn btn-primary">
-                            Open in Google Drive
-                        </button>        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <button onclick="openInNewTab('https://leads.drasticdigital.com')">View Leads</button>
+    <button id="drive-button" onclick="openInNewTab(driveLink)">Open Google Drive</button>
 
     <script>
         let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID";
 
-        function sendMessageToZoho(url) {
-            window.parent.postMessage({ type: "openExternalLink", url: url }, "*");
+        function openInNewTab(url) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var clientDriveLink = urlParams.get("drive_link");
+            const urlParams = new URLSearchParams(window.location.search);
+            const clientDriveLink = urlParams.get("drive_link");
 
             if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
                 driveLink = clientDriveLink;
             }
         });
     </script>
-
-    <!-- Tabler JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
 </body>
 </html>
