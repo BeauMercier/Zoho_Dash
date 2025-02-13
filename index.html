@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,36 +10,32 @@
     <h1>Zoho iFrame Button Test</h1>
 
     <!-- Leads Button -->
-    <button id="openLeads">View Leads</button>
+    <button id="leads-btn">Open Leads Dashboard</button>
 
     <!-- Google Drive Button -->
-    <button id="openDrive">Open Google Drive</button>
+    <button id="drive-btn">Open Google Drive</button>
 
     <script>
-        // Function to open a new tab
-        function openInNewTab(url) {
-            window.open(url, "_blank", "noopener,noreferrer");
+        // Function to send message to Zoho Creator
+        function sendToZoho(url) {
+            window.parent.postMessage({ type: "openZohoUrl", url: url }, "*");
         }
 
-        // Google Drive Button (Uses URL Passed from Zoho)
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const driveLink = params.get("drive_link");
-
-            document.getElementById("openDrive").addEventListener("click", function () {
-                if (driveLink && driveLink.trim() !== "" && driveLink.toLowerCase() !== "null") {
-                    openInNewTab(driveLink);
-                } else {
-                    alert("Google Drive link is missing!");
-                }
-            });
+        // Attach event listeners to buttons
+        document.getElementById("leads-btn").addEventListener("click", function() {
+            sendToZoho("https://leads.drasticdigital.com");
         });
 
-        // Leads Button (Triggers Zoho Creator Function)
-        document.getElementById("openLeads").addEventListener("click", function () {
-            parent.postMessage({ type: "openZohoUrl", url: "https://leads.drasticdigital.com" }, "*");
-        });
+        document.getElementById("drive-btn").addEventListener("click", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const driveLink = urlParams.get("drive_link");
 
+            if (driveLink) {
+                sendToZoho(driveLink);
+            } else {
+                alert("Google Drive link not found!");
+            }
+        });
     </script>
 
 </body>
