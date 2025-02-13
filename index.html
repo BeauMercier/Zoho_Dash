@@ -58,22 +58,38 @@
             <h1 class="page-title">Dashboard Overview</h1>
         </div>
 
-   <a href="#" id="leads-button" class="btn btn-danger">
-    View Leads
-</a>
+        <!-- Buttons (Send Message to Zoho Creator) -->
+        <div class="row mt-4">
+            <!-- Leads Button -->
+            <a href="#" onclick="sendToZoho('https://leads.drasticdigital.com')" class="btn btn-danger">
+                View Leads
+            </a>
 
-
-
+            <!-- Google Drive Button -->
+            <a id="drive-link" href="#" onclick="sendToZoho(this.dataset.driveLink)" class="btn btn-primary">
+                Open in Google Drive
+            </a>
+        </div>
     </div>
 
-    
-<script>
-    document.getElementById("leads-button").addEventListener("click", function(event) {
-        event.preventDefault(); // ✅ Stops default link behavior
-        console.log("🚀 Sending message to Zoho Creator: https://leads.drasticdigital.com"); // ✅ Debugging Log
-        parent.postMessage({ type: "callZohoFunction", url: "https://leads.drasticdigital.com" }, "*");
-    });
-</script>
+    <script>
+        function sendToZoho(url) {
+            if (url && url.trim() !== "") {
+                // ✅ Send the link to Zoho Creator
+                parent.postMessage({ type: "openZohoUrl", url: url }, "*");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var clientDriveLink = urlParams.get("drive_link");
+
+            if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
+                var driveLinkElement = document.getElementById("drive-link");
+                driveLinkElement.dataset.driveLink = decodeURIComponent(clientDriveLink);
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
