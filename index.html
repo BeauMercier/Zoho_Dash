@@ -186,6 +186,7 @@
                         <p>Access your project files in Google Drive below:</p>
                         <!-- This link will be updated dynamically if ?drive_link=... is present -->
                         <!-- Google Drive Button -->
+                      <!-- Google Drive Button -->
                         <a href="#" id="drive-button" class="btn btn-primary">
                             Open in Google Drive
                         </a>
@@ -201,7 +202,7 @@
     <!-- Tabler JS -->
     <script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
 
-   <script>
+ <script>
     // ✅ Extract drive link from URL
     var urlParams = new URLSearchParams(window.location.search);
     var driveLink = urlParams.get("drive_link") || "";
@@ -211,7 +212,9 @@
     // ✅ When button is clicked, send a message to Zoho Creator
     document.getElementById("drive-button").addEventListener("click", function(event) {
         event.preventDefault(); // ✅ Prevents default link behavior
-        console.log("🚀 Sending message to Zoho:", driveLink);
+        console.log("🚀 Sending message to Zoho Creator:", driveLink);
+        
+        // ✅ Send the link to Zoho Creator
         parent.postMessage({ type: "openDrive", url: driveLink }, "*");
     });
 </script>
