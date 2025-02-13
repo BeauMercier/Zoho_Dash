@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Zoho iFrame Google Drive Fix</title>
+    <title>Open Google Drive</title>
 </head>
 <body>
 
@@ -13,7 +13,6 @@
             const urlParams = new URLSearchParams(window.location.search);
             let driveLink = urlParams.get("drive_link");
 
-            // Ensure the link is valid before using it
             if (driveLink && driveLink.trim() !== "" && driveLink.toLowerCase() !== "null") {
                 if (driveLink.includes("embeddedfolderview?id=")) {
                     const folderId = driveLink.split("embeddedfolderview?id=")[1];
@@ -27,14 +26,12 @@
         document.getElementById("drive-button").addEventListener("click", function() {
             const driveLink = getDriveLink();
             if (driveLink) {
-                // Create a hidden anchor element and trigger a real click
+                // Create an anchor element and simulate a real user click
                 const a = document.createElement('a');
                 a.href = driveLink;
                 a.target = '_blank';
                 a.rel = 'noopener noreferrer';
-                document.body.appendChild(a);
                 a.click();
-                document.body.removeChild(a);
             } else {
                 alert("No valid Google Drive link available.");
             }
