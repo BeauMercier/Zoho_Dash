@@ -1,65 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoho iFrame Button Test</title>
-
-    <style>
-        html, body {
-            background-color: #000000;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-
-        button {
-            background-color: #007aff;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 6px;
-            margin: 10px;
-        }
-
-        button:hover {
-            background-color: #005bb5;
-        }
-    </style>
 </head>
 <body>
 
     <h1>Zoho iFrame Button Test</h1>
 
     <!-- Leads Button -->
-    <button onclick="sendMessageToZoho('https://leads.drasticdigital.com')">
-        View Leads
-    </button>
+    <button id="openLeads">View Leads</button>
 
     <!-- Google Drive Button -->
-    <button id="drive-button" onclick="sendMessageToZoho(driveLink)">
-        Open Google Drive
-    </button>
+    <button id="openDrive">Open Google Drive</button>
 
     <script>
-        let driveLink = "https://drive.google.com/drive/folders/YOUR_DEFAULT_FOLDER_ID";
-
-        function sendMessageToZoho(url) {
-            console.log("Sending URL to Zoho Creator:", url);
-            window.parent.postMessage({ type: "openExternalLink", url: url }, "*");
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var clientDriveLink = urlParams.get("drive_link");
-
-            if (clientDriveLink && clientDriveLink.trim() !== "" && clientDriveLink.toLowerCase() !== "null") {
-                driveLink = decodeURIComponent(clientDriveLink); // Fix encoding issue
-            }
+        // Google Drive Button (Uses URL Passed from Zoho)
+        document.addEventListener("DOMContentLoaded", function () {
+            const params = new URLSearchParams(window.location.search);
+            const driveLink = params.get("drive_link");
+            document.getElementById("openDrive").addEventListener("click", function () {
+                if (driveLink) {
+                    window.open(driveLink, "_blank");
+                } else {
+                    alert("Google Drive link is missing!");
+                }
+            });
         });
+
+        // Leads Button (Triggers Zoho Creator Function)
+        document.getElementById("openLeads").addEventListener("click", function () {
+            parent.postMessage({ type: "openZohoUrl", url: "https://leads.drasticdigital.com" }, "*");
+        });
+
     </script>
 
 </body>
