@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoho iFrame Button Test</title>
-</head>
+    </head>
 <body>
     <h1>Zoho iFrame Button Test</h1>
     <button onclick="sendMessageToZoho('https://leads.drasticdigital.com')">View Leads</button>
-    <button id="drive-button" onclick="openDriveLink()">Open Google Drive</button>
+    <button id="drive-button" onclick="openDriveLink()" disabled>Open Google Drive</button> <--- Initial Disabled
 
     <script>
-        let driveLink; // Do NOT initialize here. Let the message from Zoho set it.
+        let driveLink; 
 
         function sendMessageToZoho(url) {
             window.parent.postMessage({ type: "openExternalLink", url: url }, "*");
@@ -19,7 +16,7 @@
 
         function openDriveLink() {
             if (driveLink) {
-                sendMessageToZoho(driveLink);
+                sendMessageToZoho(decodeURIComponent(driveLink)); // Decode before sending
             } else {
                 console.error("Drive link not yet available.");
                 alert("Drive link is not yet available. Please wait.");
@@ -29,14 +26,20 @@
         window.addEventListener("message", function(event) {
             if (event.data && event.data.type === "setDriveLink") {
                 driveLink = event.data.link;
-                console.log("Received Drive link:", driveLink);
-                // Enable the Drive button now that we have the link
-                document.getElementById("drive-button").disabled = false; 
+                console.log("Received Drive link (encoded):", driveLink);
+                // Decode here for use within the iframe
+                const decodedLink = decodeURIComponent(driveLink); 
+                console.log("Decoded Drive link:", decodedLink);
+                document.getElementById("drive-button").disabled = false;
             }
         });
 
-        // Disable the Drive button initially until we receive the link
-        document.getElementById("drive-button").disabled = true; 
+        // Add an error listener for debugging within the iframe
+        window.addEventListener("error", (event) => {
+            console.error("Iframe script error:", event);
+            alert("A script error occurred in the dashboard. Please check the console for details.");
+        });
+
     </script>
 </body>
 </html>
